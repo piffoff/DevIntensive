@@ -8,8 +8,8 @@
     <dimen name="size_medium_56">56dp</dimen>
     <dimen name="size_large_72">72dp</dimen>
     <!--Spaces-->
-    <dimen name="space_smaller_4">4dp</dimen>
-    <dimen name="space_small_8">8dp</dimen>
+    <dimen name="space_smaller_8">8dp</dimen>
+    <dimen name="space_small_16">16dp</dimen>
     <dimen name="space_medium_24">24dp</dimen>
     <dimen name="space_normal_48">48dp</dimen>
     <dimen name="space_large_56">56dp</dimen>
