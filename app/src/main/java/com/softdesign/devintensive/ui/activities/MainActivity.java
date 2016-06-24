@@ -8,7 +8,7 @@ import com.softdesign.devintensive.utils.ConstantMenedger;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = ConstantMenedger.TUG + "MainActivity";
+    private static final String TAG = ConstantMenedger.TUG_PREFIX + "MainActivity ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

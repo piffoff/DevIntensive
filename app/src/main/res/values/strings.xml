@@ -7,8 +7,17 @@
     <string name="info_code_amount_text">Написано строк кода</string>
     <string name="info_projects_amount">1</string>
     <string name="info_projects_amount_text">Проектов</string>
-    <string name="mobile_phone">Мобильный</string>
+    <string name="mobile_phone">Mobile</string>
     <string name="my_phone">89005000000</string>
     <string name="DescriptionPhone">Description Phone</string>
+    <string name="email_hint">E-mail</string>
+    <string name="mail_text">jiamepok2008@yandex/ru</string>
+    <string name="vk_hint">VK Profile</string>
+    <string name="vk_text">vk/piffoff</string>
+    <string name="repository_hint">Repository</string>
+    <string name="repository_text">https://github.com/piffoff</string>
+    <string name="about_myself">About Myself</string>
+    <string name="about_myself_text">Hello! My name is Sergey!</string>
+    <string name="content_descripshion">descripshion</string>
 
 </resources>
