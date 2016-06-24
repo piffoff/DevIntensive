@@ -95,7 +95,7 @@
 
         <ImageView
             style="@style/MyStyleIconRight"
-            android:contentDescription="@string/DescriptionPhone"
+            android:contentDescription="PhoneImage"
             android:src="@drawable/ic_phone_in_talk_black_24dp"/>
 
     </LinearLayout>
