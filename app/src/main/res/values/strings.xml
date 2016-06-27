@@ -10,5 +10,14 @@
     <string name="mobile_phone">Мобильный</string>
     <string name="my_phone">89005000000</string>
     <string name="DescriptionPhone">Description Phone</string>
+    <string name="email_hint">E-mail</string>
+    <string name="content_descripshion">content_descripshion</string>
+    <string name="mail_text">MyMail@mail.ru</string>
+    <string name="vk_hint">VK</string>
+    <string name="vk_text">http://vk/piffoff</string>
+    <string name="repository_hint">GitHub</string>
+    <string name="repository_text">http://github/piffoff</string>
+    <string name="about_myself">About myself</string>
+    <string name="about_myself_text">Hello! My name is Sergey!</string>
 
 </resources>
