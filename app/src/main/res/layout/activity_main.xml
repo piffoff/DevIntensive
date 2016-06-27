@@ -85,6 +85,7 @@
         <LinearLayout style="@style/MyStyleInfoList">
 
             <ImageView
+                android:id="@+id/call_img"
                 style="@style/MyStyleIconLeft"
                 android:contentDescription="@string/DescriptionPhone"
                 android:src="@drawable/ic_call_black_24dp" />

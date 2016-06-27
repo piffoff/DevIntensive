@@ -23,11 +23,11 @@
         <item name="android:layout_height">@dimen/size_24</item>
         <item name="android:layout_marginTop">@dimen/size_24</item>
     </style>
-    
+
     <style name="MyStyleIconLeft" parent="MyStyleIcon">
         <item name="android:layout_marginLeft">@dimen/size_16</item>
     </style>
-    
+
     <style name="MyStyleIconRight" parent="MyStyleIcon">
         <item name="android:layout_marginRight">@dimen/size_32</item>
     </style>
@@ -63,6 +63,11 @@
         <item name="android:layout_height">@dimen/line_size</item>
         <item name="android:background">@color/color_grey</item>
         <item name="android:layout_marginLeft">@dimen/size_72</item>
+    </style>
+
+    <style name="custom_dialog">
+        <item name="android:fullDark">@android:color/transparent</item>
+
     </style>
 
 </resources>
