@@ -13,9 +13,9 @@ import com.softdesign.devintensive.utils.ConstantMenedger;
 /**
  * Created by Admin on 27.06.2016.
  */
-public class BaseActiviti extends AppCompatActivity {
-    static final String TAG = ConstantMenedger.TAG_PREFIX + "BaseActiviti";
-    protected ProgressDialog mProgressDialog;
+public class BaseActivity extends AppCompatActivity {
+    static final String TAG = ConstantMenedger.TAG_PREFIX + "_BaseActivity";
+    private ProgressDialog mProgressDialog;
 
     public void showProgress() {
         if (mProgressDialog == null) {
@@ -23,10 +23,13 @@ public class BaseActiviti extends AppCompatActivity {
             mProgressDialog.setCancelable(false);
             mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             mProgressDialog.show();
-            setContentView(R.layout.progress_splash);
+            mProgressDialog.setContentView(R.layout.progress_splash);
+            Log.d(TAG, "showProgress()_1");
         } else {
             mProgressDialog.show();
             setContentView(R.layout.progress_splash);
+            Log.d(TAG, "showProgress()_2");
+
         }
 
     }
@@ -34,15 +37,16 @@ public class BaseActiviti extends AppCompatActivity {
     public void hideProgress() {
         if (mProgressDialog.isShowing()) {
             mProgressDialog.hide();
+            Log.d(TAG, "hideProgress()");
         }
     }
 
     public void showError(String message, Exception error) {
-        showToas(message);
+        showToast(message);
         Log.e(TAG, String.valueOf(error));
     }
 
-    public void showToas(String message) {
+    public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
