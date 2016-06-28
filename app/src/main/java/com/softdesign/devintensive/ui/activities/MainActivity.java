@@ -3,6 +3,7 @@ package com.softdesign.devintensive.ui.activities;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -11,19 +12,29 @@ import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.support.v7.widget.Toolbar;
 
 import com.softdesign.devintensive.R;
 import com.softdesign.devintensive.utils.ConstantMenedger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends BaseActivity {
+
+    private int mCurentEditMode = 0;
 
     private static final String TAG = ConstantMenedger.TAG_PREFIX + "_MainActivity";
     private ImageView mImageView_1;
     private CoordinatorLayout mCoordinatorLayout;
     private Toolbar mToolbar;
     private DrawerLayout mNavigationDrawer;
+    private FloatingActionButton mFab;
+    private EditText mUserPhone, mUserMail, mUserVk, mUserGit, mUserAbout;
+
+    private List<EditText> mUSerInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +68,34 @@ public class MainActivity extends BaseActivity {
         mNavigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
 
         setupDrawer();
+
+        mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCurentEditMode == 0) {
+                    changeEditMode(1);
+                }
+                else {
+                    changeEditMode(0);
+                }
+
+            }
+        });
+
+        mUserPhone = (EditText) findViewById(R.id.phone);
+        mUserMail = (EditText) findViewById(R.id.mail);
+        mUserVk = (EditText) findViewById(R.id.vk);
+        mUserGit = (EditText) findViewById(R.id.git);
+        mUserAbout = (EditText) findViewById(R.id.about);
+
+        mUSerInfo = new ArrayList<>();
+        mUSerInfo.add(mUserPhone);
+        mUSerInfo.add(mUserMail);
+        mUSerInfo.add(mUserVk);
+        mUSerInfo.add(mUserGit);
+        mUSerInfo.add(mUserAbout);
+
     }
 
     @Override
@@ -144,5 +183,29 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
+    public void changeEditMode(int mode) {
+        if (mode == 1) {
+            for (EditText userValue : mUSerInfo) {
+                userValue.setEnabled(true);
+                userValue.setFocusable(true);
+            }
+        } else {
+            for (EditText userValue : mUSerInfo) {
+                userValue.setEnabled(false);
+                userValue.setFocusable(false);
+            }
+        }
+
+    }
+
+    public void loadUserInfo() {
+
+    }
+
+    public void saveUserInfo() {
+
+    }
+
 }
 
