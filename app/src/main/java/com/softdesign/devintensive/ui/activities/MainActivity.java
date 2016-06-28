@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.support.v7.widget.Toolbar;
 
 import com.softdesign.devintensive.R;
+import com.softdesign.devintensive.data.managers.DataManger;
 import com.softdesign.devintensive.utils.ConstantMenedger;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import java.util.List;
 public class MainActivity extends BaseActivity {
 
     private int mCurentEditMode = 0;
-
+    private DataManger mDataManger;
     private static final String TAG = ConstantMenedger.TAG_PREFIX + "_MainActivity";
     private ImageView mImageView_1;
     private CoordinatorLayout mCoordinatorLayout;
@@ -34,7 +35,7 @@ public class MainActivity extends BaseActivity {
     private FloatingActionButton mFab;
     private EditText mUserPhone, mUserMail, mUserVk, mUserGit, mUserAbout;
 
-    private List<EditText> mUSerInfo;
+    private List<EditText> mUSerInfoViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,22 @@ public class MainActivity extends BaseActivity {
         Log.d(TAG, "onCreate()");
 
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mNavigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
+        mDataManger = DataManger.getInstance();
+
+        mUserPhone = (EditText) findViewById(R.id.phone);
+        mUserMail = (EditText) findViewById(R.id.mail);
+        mUserVk = (EditText) findViewById(R.id.vk);
+        mUserGit = (EditText) findViewById(R.id.git);
+        mUserAbout = (EditText) findViewById(R.id.about);
+
+        mUSerInfoViews = new ArrayList<>();
+        mUSerInfoViews.add(mUserPhone);
+        mUSerInfoViews.add(mUserMail);
+        mUSerInfoViews.add(mUserVk);
+        mUSerInfoViews.add(mUserGit);
+        mUSerInfoViews.add(mUserAbout);
 
         mImageView_1 = (ImageView) findViewById(R.id.call_img);
         mImageView_1.setOnClickListener(new View.OnClickListener() {
@@ -58,43 +75,28 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        if (savedInstanceState == null) {
-            showSnackBar("First run!");
-        } else showSnackBar("Not first run.");
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setupToolbar();
-
-        mNavigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
-
-        setupDrawer();
-
         mFab = (FloatingActionButton) findViewById(R.id.fab);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mCurentEditMode == 0) {
-                    changeEditMode(1);
+                    mCurentEditMode = 1;
+                } else {
+                    mCurentEditMode = 0;
                 }
-                else {
-                    changeEditMode(0);
-                }
-
+                changeEditMode(mCurentEditMode);
             }
         });
 
-        mUserPhone = (EditText) findViewById(R.id.phone);
-        mUserMail = (EditText) findViewById(R.id.mail);
-        mUserVk = (EditText) findViewById(R.id.vk);
-        mUserGit = (EditText) findViewById(R.id.git);
-        mUserAbout = (EditText) findViewById(R.id.about);
+        setupToolbar();
+        setupDrawer();
 
-        mUSerInfo = new ArrayList<>();
-        mUSerInfo.add(mUserPhone);
-        mUSerInfo.add(mUserMail);
-        mUSerInfo.add(mUserVk);
-        mUSerInfo.add(mUserGit);
-        mUSerInfo.add(mUserAbout);
+        if (savedInstanceState == null) {
+            showSnackBar("First run!");
+        } else {
+            mCurentEditMode = savedInstanceState.getInt(ConstantMenedger.EDIT_MODE_KEY, 0);
+            changeEditMode(mCurentEditMode);
+        };
 
     }
 
@@ -138,6 +140,8 @@ public class MainActivity extends BaseActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstanceState()");
+
+        outState.putInt(ConstantMenedger.EDIT_MODE_KEY, mCurentEditMode);
     }
 
     public void runWithDelay() {
@@ -186,26 +190,39 @@ public class MainActivity extends BaseActivity {
 
     public void changeEditMode(int mode) {
         if (mode == 1) {
-            for (EditText userValue : mUSerInfo) {
+            mFab.setImageResource(R.drawable.ic_done_black_24dp);
+            for (EditText userValue : mUSerInfoViews) {
                 userValue.setEnabled(true);
                 userValue.setFocusable(true);
+                userValue.setFocusableInTouchMode(true);
             }
         } else {
-            for (EditText userValue : mUSerInfo) {
+            mFab.setImageResource(R.drawable.ic_create_black_24dp);
+            for (EditText userValue : mUSerInfoViews) {
                 userValue.setEnabled(false);
                 userValue.setFocusable(false);
+                userValue.setFocusableInTouchMode(false);
             }
         }
 
     }
 
     public void loadUserInfo() {
-
+        List<String> userData = mDataManger.getPreferenceManager().laadUserProfileData();
+        for (int i = 0; i < userData.size(); i++) {
+            mUSerInfoViews.get(i).setText(userData.get(i));
+        }
     }
 
     public void saveUserInfo() {
-
+        List<String> userData = new ArrayList<>();
+        for (EditText userFieldView : mUSerInfoViews) {
+            userData.add(userFieldView.getText().toString());
+        }
+        mDataManger.getPreferenceManager().saveUserProfileData(userData);
     }
 
 }
+
+
 
