@@ -1,5 +1,7 @@
 package com.softdesign.devintensive.ui.activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
@@ -19,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import com.softdesign.devintensive.R;
 import com.softdesign.devintensive.data.managers.DataManger;
 import com.softdesign.devintensive.utils.ConstantMenedger;
+import com.softdesign.devintensive.utils.RoundImage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,7 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout mNavigationDrawer;
     private FloatingActionButton mFab;
     private EditText mUserPhone, mUserMail, mUserVk, mUserGit, mUserAbout;
+    private ImageView mUserAvatar;
 
     private List<EditText> mUSerInfoViews;
 
@@ -177,6 +181,10 @@ public class MainActivity extends BaseActivity {
 
     public void setupDrawer() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+        mUserAvatar = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.user_avatar);
+        mUserAvatar.setImageBitmap(getRoundBitmap(R.drawable.smile));
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -186,6 +194,13 @@ public class MainActivity extends BaseActivity {
                 return false;
             }
         });
+    }
+    /*методы скругления аватарки*/
+    private Bitmap getRoundBitmap(int drawableRes) {
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableRes);
+        bitmap = RoundImage.getRoundedBitmap(bitmap);
+        return bitmap;
     }
 
     public void changeEditMode(int mode) {

@@ -10,9 +10,9 @@
     android:background="@drawable/backgrounds_1">
 
     <ImageView
+        android:id="@+id/user_avatar"
         android:layout_width="@dimen/size_60"
         android:layout_height="@dimen/size_60"
-        android:background="@color/color_light_blue"
         android:layout_marginTop="@dimen/size_16"
         android:src="@drawable/smile"/>
 
