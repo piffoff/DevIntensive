@@ -7,13 +7,14 @@
     android:paddingRight="@dimen/size_16"
     android:paddingTop="@dimen/size_24"
     android:paddingBottom="@dimen/size_8"
-    android:background="@drawable/backgrounds_11">
+    android:background="@drawable/backgrounds_1">
 
     <ImageView
         android:layout_width="@dimen/size_60"
         android:layout_height="@dimen/size_60"
         android:background="@color/color_light_blue"
-        android:layout_marginTop="@dimen/size_16"/>
+        android:layout_marginTop="@dimen/size_16"
+        android:src="@drawable/smile"/>
 
     <LinearLayout
         android:layout_width="match_parent"
