@@ -19,5 +19,6 @@
     <string name="repository_text">http://github/piffoff</string>
     <string name="about_myself">About myself</string>
     <string name="about_myself_text">Hello! My name is Sergey!</string>
+    <string name="action_settings">settings</string>
 
 </resources>
