@@ -9,7 +9,6 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
-
 public class RoundImage {
 
     public static Bitmap getRoundedBitmap(Bitmap bitmap) {

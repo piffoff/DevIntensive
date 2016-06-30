@@ -105,42 +105,6 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart()");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume()");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause()");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop()");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy()");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG, "onRestart()");
-    }
-
-    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstanceState()");
@@ -181,10 +145,10 @@ public class MainActivity extends BaseActivity {
 
     public void setupDrawer() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-
+        /*скругление аватарки*/
         mUserAvatar = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.user_avatar);
         mUserAvatar.setImageBitmap(getRoundBitmap(R.drawable.smile));
-
+        /*нажатие меню*/
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -219,7 +183,6 @@ public class MainActivity extends BaseActivity {
                 userValue.setFocusableInTouchMode(false);
             }
         }
-
     }
 
     public void loadUserInfo() {
@@ -237,7 +200,14 @@ public class MainActivity extends BaseActivity {
         mDataManger.getPreferenceManager().saveUserProfileData(userData);
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if (mNavigationDrawer.isDrawerOpen(GravityCompat.START)) {
+         mNavigationDrawer.closeDrawer(GravityCompat.START);
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
 }
-
-
-
