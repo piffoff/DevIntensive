@@ -14,4 +14,5 @@ public interface ConstantMenedger {
     String USER_GIT_KEY = "USER_GIT_KEY";
     String USER_ABOUT_KEY = "USER_ABOUT_KEY";
 
+    int LOAD_PROFILE_FOTO = 1;
 }

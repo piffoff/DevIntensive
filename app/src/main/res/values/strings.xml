@@ -20,5 +20,7 @@
     <string name="about_myself">About myself</string>
     <string name="about_myself_text">Hello! My name is Sergey!</string>
     <string name="action_settings">settings</string>
+    <string name="change_user_photo">Изменить фотографию профиля</string>
+    <string name="user_profile_dialog_title">Choose fhoto</string>
 
 </resources>
