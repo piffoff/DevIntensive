@@ -1,19 +1,29 @@
 package com.softdesign.devintensive.ui.activities;
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -30,10 +40,13 @@ import com.softdesign.devintensive.R;
 import com.softdesign.devintensive.data.managers.DataManger;
 import com.softdesign.devintensive.utils.ConstantMenedger;
 import com.softdesign.devintensive.utils.RoundImage;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends BaseActivity {
@@ -48,14 +61,17 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout mNavigationDrawer;
     private FloatingActionButton mFab;
     private EditText mUserPhone, mUserMail, mUserVk, mUserGit, mUserAbout;
-    private ImageView mUserAvatar, mImageView_1;
+    private ImageView mUserAvatar, mImageView_1, mProfileImage;
     private RelativeLayout mProfilePlaceHolder;
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private AppBarLayout mAppBarLayout;
+    private SharedPreferences mSharedPreferences;
 
     private List<EditText> mUSerInfoViews;
 
     private AppBarLayout.LayoutParams mAppBarParams = null;
+    private File mPhotoFile = null;
+    private Uri mSelectedImage = null;
 
 
     @Override
@@ -70,6 +86,7 @@ public class MainActivity extends BaseActivity {
         mDataManger = DataManger.getInstance();
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         mAppBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
+        mProfileImage = (ImageView) findViewById(R.id.user_photo_img);
 
         mUserPhone = (EditText) findViewById(R.id.phone);
         mUserMail = (EditText) findViewById(R.id.mail);
@@ -126,6 +143,7 @@ public class MainActivity extends BaseActivity {
         }
         ;
 
+        insertProfileImage(mDataManger.getPreferenceManager().loadUserPhoto());
     }
 
     @Override
@@ -173,7 +191,23 @@ public class MainActivity extends BaseActivity {
     /*Получение результата из другой активити*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case ConstantMenedger.REQUEST_CAMERA_PICTURE:
+                if (resultCode == RESULT_OK && data != null) {
+                    mSelectedImage = Uri.fromFile(mPhotoFile);
+                    insertProfileImage(mSelectedImage);
+
+                }
+                break;
+            case ConstantMenedger.REQUEST_GALERY_PICKER:
+                if (resultCode == RESULT_OK && data != null) {
+                    mSelectedImage = data.getData();
+                    insertProfileImage(mSelectedImage);
+                }
+                break;
+        }
+
     }
 
     @Override
@@ -201,12 +235,10 @@ public class MainActivity extends BaseActivity {
                             case 0:
                                 //TODO: iz galerei
                                 loadPhotoFromGalery();
-                                showSnackBar("111");
                                 break;
                             case 1:
                                 //TODO: iz cameri
                                 loadPhotoFromCamers();
-                                showSnackBar("222");
                                 break;
                             case 2:
                                 dialog.cancel();
@@ -290,9 +322,55 @@ public class MainActivity extends BaseActivity {
 
     private void loadPhotoFromCamers() {
 
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+
+            Intent takeCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            try {
+                mPhotoFile = createImageFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+                //TODO: обработать ошибку
+            }
+
+            if (mPhotoFile != null) {
+                //TODO передать фотографию интенту
+                takeCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mPhotoFile));
+                startActivityForResult(takeCaptureIntent, ConstantMenedger.REQUEST_CAMERA_PICTURE);
+            }
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{
+                    android.Manifest.permission.CAMERA,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            }, ConstantMenedger.CAMERA_REQEST_REMISSION_CODE);
+        }
+
+        Snackbar.make(mCoordinatorLayout, "Проверить настройки", Snackbar.LENGTH_LONG).setAction("Check settings", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openApplicationSettings();
+            }
+        }).show();
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == ConstantMenedger.CAMERA_REQEST_REMISSION_CODE && grantResults.length == 2){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                //TODO
+            }
+            if (grantResults[1]== PackageManager.PERMISSION_GRANTED){
+                //TODO
+            }
+        }
     }
 
     private void loadPhotoFromGalery() {
+        Intent takeGaleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        takeGaleryIntent.setType("image/*");
+        startActivityForResult(Intent.createChooser(takeGaleryIntent, getString(R.string.user_profile_choose_massage)), ConstantMenedger.REQUEST_GALERY_PICKER);
 
     }
 
@@ -315,7 +393,35 @@ public class MainActivity extends BaseActivity {
         mCollapsingToolbarLayout.setLayoutParams(mAppBarParams);
     }
 
-    private File createFile() throws IOException {
+    private File createImageFile() throws IOException {
 
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imgFileName = "IMG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+
+        File image = File.createTempFile(".jpg", imgFileName, storageDir);
+
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+        values.put(MediaStore.Images.Media.DATA, image.getAbsolutePath());
+
+        this.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+        return image;
     }
+
+    private void insertProfileImage(Uri selectedImage) {
+        Picasso.with(this).load(selectedImage).into(mProfileImage);
+
+        mDataManger.getPreferenceManager().saveUserFhoto(selectedImage);
+    }
+
+    public void openApplicationSettings() {
+
+        Intent appSettings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));
+        startActivityForResult(appSettings, ConstantMenedger.PERMISSION_REQUEST_SETTINGS_CODE);
+    }
+
+
 }

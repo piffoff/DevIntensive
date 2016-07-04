@@ -22,5 +22,6 @@
     <string name="action_settings">settings</string>
     <string name="change_user_photo">Изменить фотографию профиля</string>
     <string name="user_profile_dialog_title">Choose fhoto</string>
+    <string name="user_profile_choose_massage">Choose photo</string>
 
 </resources>

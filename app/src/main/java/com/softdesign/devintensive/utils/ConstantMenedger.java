@@ -15,4 +15,10 @@ public interface ConstantMenedger {
     String USER_ABOUT_KEY = "USER_ABOUT_KEY";
 
     int LOAD_PROFILE_FOTO = 1;
+
+    int REQUEST_CAMERA_PICTURE = 99;
+    int REQUEST_GALERY_PICKER = 88;
+    String USER_PHOTO_KEY = "USER_PHOTO_KEY";
+    int PERMISSION_REQUEST_SETTINGS_CODE = 77;
+    int CAMERA_REQEST_REMISSION_CODE = 101;
 }
