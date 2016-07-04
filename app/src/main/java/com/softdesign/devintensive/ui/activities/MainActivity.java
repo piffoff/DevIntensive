@@ -140,9 +140,9 @@ public class MainActivity extends BaseActivity {
         } else {
             mCurentEditMode = savedInstanceState.getInt(ConstantMenedger.EDIT_MODE_KEY, 0);
             changeEditMode(mCurentEditMode);
-        }
-        ;
+        };
 
+        loadUserInfo();
         insertProfileImage(mDataManger.getPreferenceManager().loadUserPhoto());
     }
 
@@ -306,7 +306,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void loadUserInfo() {
-        List<String> userData = mDataManger.getPreferenceManager().laadUserProfileData();
+        List<String> userData = mDataManger.getPreferenceManager().loadUserProfileData();
         for (int i = 0; i < userData.size(); i++) {
             mUSerInfoViews.get(i).setText(userData.get(i));
         }
@@ -414,7 +414,7 @@ public class MainActivity extends BaseActivity {
     private void insertProfileImage(Uri selectedImage) {
         Picasso.with(this).load(selectedImage).into(mProfileImage);
 
-        mDataManger.getPreferenceManager().saveUserFhoto(selectedImage);
+        mDataManger.getPreferenceManager().saveUserPhoto(selectedImage);
     }
 
     public void openApplicationSettings() {
@@ -422,6 +422,5 @@ public class MainActivity extends BaseActivity {
         Intent appSettings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));
         startActivityForResult(appSettings, ConstantMenedger.PERMISSION_REQUEST_SETTINGS_CODE);
     }
-
 
 }

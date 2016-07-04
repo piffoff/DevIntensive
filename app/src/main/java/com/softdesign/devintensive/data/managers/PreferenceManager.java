@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 
 import com.softdesign.devintensive.utils.ConstantMenedger;
-import com.softdesign.devintensive.utils.DevintensiveApplication;
+import com.softdesign.devintensive.utils.DevIntensiveApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,7 @@ public class PreferenceManager {
     private static final String[] USER_FIELDS = {ConstantMenedger.USER_PHONE_KEY, ConstantMenedger.USER_EMAIL_KEY, ConstantMenedger.USER_VK_KEY, ConstantMenedger.USER_GIT_KEY, ConstantMenedger.USER_ABOUT_KEY};
 
     public PreferenceManager(){
-        this.mSharedPreferences = DevintensiveApplication.getSharedPreferences();
-
+        this.mSharedPreferences = DevIntensiveApplication.getSharedPreferences();
     }
 
     public void saveUserProfileData(List<String> userFields){
@@ -30,7 +29,7 @@ public class PreferenceManager {
         editor.apply();
     }
 
-    public List<String> laadUserProfileData(){
+    public List<String> loadUserProfileData(){
 
         List<String> userFields = new ArrayList<>();
         userFields.add(mSharedPreferences.getString(ConstantMenedger.USER_PHONE_KEY, "null"));
@@ -42,13 +41,13 @@ public class PreferenceManager {
         return userFields;
     }
 
-    public void saveUserFhoto(Uri uri){
+    public void saveUserPhoto(Uri uri){
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putString(ConstantMenedger.USER_PHOTO_KEY, uri.toString());
         editor.apply();
     }
 
     public Uri loadUserPhoto(){
-        return Uri.parse(mSharedPreferences.getString(ConstantMenedger.USER_PHOTO_KEY, "android.resourse://com.softdesign.devintensive/drawable/user_photo.jpg"));
+        return Uri.parse(mSharedPreferences.getString(ConstantMenedger.USER_PHOTO_KEY, "android.recourse://com.softdesign.devintensive/drawable/user_photo"));
     }
 }
