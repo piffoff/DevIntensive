@@ -23,5 +23,8 @@
     <string name="change_user_photo">Изменить фотографию профиля</string>
     <string name="user_profile_dialog_title">Choose fhoto</string>
     <string name="user_profile_choose_massage">Choose photo</string>
+    <string name="dialog_load_from_gallery">Load from galery</string>
+    <string name="dialog_make_photo">Make Photo</string>
+    <string name="dialog_cancel">Cancel</string>
 
 </resources>

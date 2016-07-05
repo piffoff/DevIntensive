@@ -8,13 +8,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.softdesign.devintensive.R;
-import com.softdesign.devintensive.utils.ConstantMenedger;
+import com.softdesign.devintensive.utils.ConstantManager;
 
 /**
  * Created by Admin on 27.06.2016.
  */
 public class BaseActivity extends AppCompatActivity {
-    static final String TAG = ConstantMenedger.TAG_PREFIX + "_BaseActivity";
+    static final String TAG = ConstantManager.TAG_PREFIX + "_BaseActivity";
     private ProgressDialog mProgressDialog;
 
     public void showProgress() {
