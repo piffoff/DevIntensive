@@ -26,5 +26,8 @@
     <string name="dialog_load_from_gallery">Загрузить из галереи</string>
     <string name="dialog_make_photo">Сделать фото</string>
     <string name="dialog_cancel">Отмена</string>
+    <string name="header_authorization_enter">Enter</string>
+    <string name="hint.authorization_forgotten_password">Forgot password?</string>
+    <string name="hint_authorization_password">Password</string>
 
 </resources>

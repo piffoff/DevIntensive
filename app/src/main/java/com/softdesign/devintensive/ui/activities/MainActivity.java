@@ -293,6 +293,11 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    private void insertProfileImage(Uri selectedImage) {
+        Picasso.with(this).load(selectedImage).into(mProfileImage);
+        mDataManger.getPreferenceManager().saveUserPhoto(selectedImage);
+    }
+
     /*Создание и обработка диалога*/
     @Override
     protected Dialog onCreateDialog(int id) {
@@ -345,8 +350,6 @@ public class MainActivity extends BaseActivity {
                 && ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
 
-            Intent takeCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
             try {
                 mPhotoFile = createImageFile();
             } catch (IOException e) {
@@ -354,6 +357,7 @@ public class MainActivity extends BaseActivity {
             }
 
             if (mPhotoFile != null) {
+                Intent takeCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 takeCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mPhotoFile));
                 startActivityForResult(takeCaptureIntent, ConstantManager.REQUEST_CAMERA_PICTURE);
             }
@@ -371,6 +375,25 @@ public class MainActivity extends BaseActivity {
             }
         }).show();
 
+    }
+
+    private File createImageFile() throws IOException {
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HH_mm_ss").format(new Date());
+        String imgFileName = "IMG_" + timeStamp + ".png";
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        /*почему - то не работает*/
+//        File image = File.createTempFile(".jpg", imgFileName, storageDir);
+        File image = new File(storageDir, imgFileName);
+
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+        values.put(MediaStore.Images.Media.DATA, image.getAbsolutePath());
+
+        this.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+        return image;
     }
 
     /*методы скругления аватарки*/
@@ -449,34 +472,9 @@ public class MainActivity extends BaseActivity {
         mCollapsingToolbarLayout.setLayoutParams(mAppBarParams);
     }
 
-    private File createImageFile() throws IOException {
-
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imgFileName = "IMG_" + timeStamp + "_";
-        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-
-        File image = File.createTempFile(".jpg", imgFileName, storageDir);
-
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
-        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-        values.put(MediaStore.Images.Media.DATA, image.getAbsolutePath());
-
-        this.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-
-        return image;
-    }
-
-    private void insertProfileImage(Uri selectedImage) {
-        Picasso.with(this).load(selectedImage).into(mProfileImage);
-
-        mDataManger.getPreferenceManager().saveUserPhoto(selectedImage);
-    }
-
     public void openApplicationSettings() {
 
         Intent appSettings = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));
         startActivityForResult(appSettings, ConstantManager.PERMISSION_REQUEST_SETTINGS_CODE);
     }
-
 }
