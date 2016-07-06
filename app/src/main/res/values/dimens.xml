@@ -30,12 +30,15 @@
     <dimen name="pic_size">256dp</dimen>
 
     <dimen name="fab_right_space">16dp</dimen>
-    <!-- Etc -->
+
     <dimen name="line_size_1">1dp</dimen>
     <dimen name="profileImage_size_256">256dp</dimen>
-    <dimen name="fab_right_space">8dp</dimen>
+
     <dimen name="toolbar_top_offset">0dp</dimen>
     <dimen name="placeholder_photo_size_90">90dp</dimen>
     <dimen name="authScreen_authBox_sideOffset">72dp</dimen>
+
+    <dimen name="textSize_12">12sp</dimen>
+    <dimen name="textSize_20">20sp</dimen>
 
 </resources>
