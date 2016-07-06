@@ -124,7 +124,6 @@ public class MainActivity extends BaseActivity {
         mUSerInfoViews.add(mUserVk);
         mUSerInfoViews.add(mUserGit);
         mUSerInfoViews.add(mUserAbout);
-
     }
 
     private void defineClickListeners() {
@@ -153,10 +152,49 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                String userPhone = mUserPhone.getText().toString();
+                String info = mUserPhone.getText().toString();
                 Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:" + userPhone));
-                startActivity(intent);
+                intent.setData(Uri.parse("tel:" + info));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+            }
+        });
+
+        mSendImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = mUserMail.getText().toString();
+                String info = mUserAbout.getText().toString();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, info);
+                intent.putExtra(Intent.EXTRA_EMAIL, email);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+            }
+        });
+
+        mVkImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String info = "http://www." + mUserVk.getText().toString();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(info));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+            }
+        });
+
+        mRepositoryImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String info = "http://www." + mUserGit.getText().toString();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(info));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
             }
         });
     }

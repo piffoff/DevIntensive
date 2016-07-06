@@ -93,7 +93,7 @@
             <LinearLayout style="@style/MyStyleInfoListContent">
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <EditText
@@ -124,14 +124,14 @@
             <LinearLayout style="@style/MyStyleInfoListContent">
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <EditText
                         android:id="@+id/mail"
                         style="@style/MyStyleInfoListEditText"
                         android:hint="@string/email_hint"
-                        android:inputType="text"
+                        android:inputType="textEmailAddress"
                         android:text="@string/mail_text"/>
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -155,14 +155,14 @@
             <LinearLayout style="@style/MyStyleInfoListContent">
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <EditText
                         android:id="@+id/vk_text"
                         style="@style/MyStyleInfoListEditText"
                         android:hint="@string/vk_hint"
-                        android:inputType="phone"
+                        android:inputType="text"
                         android:text="@string/vk_text"/>
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -187,7 +187,7 @@
             <LinearLayout style="@style/MyStyleInfoListContent">
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <EditText
@@ -219,14 +219,14 @@
             <LinearLayout style="@style/MyStyleInfoListContent">
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <EditText
                         android:id="@+id/about"
                         style="@style/MyStyleInfoListEditText"
                         android:hint="@string/about_myself"
-                        android:inputType="phone"
+                        android:inputType="text"
                         android:text="@string/about_myself_text"/>
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
