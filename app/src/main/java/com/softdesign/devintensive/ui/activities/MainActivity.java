@@ -217,7 +217,7 @@ public class MainActivity extends BaseActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         /*скругление аватарки*/
         mUserAvatar = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.user_avatar);
-        mUserAvatar.setImageBitmap(getRoundBitmap(R.drawable.smile));
+        mUserAvatar.setImageBitmap(getRoundBitmap(R.drawable.user_photo));
         /*нажатие меню*/
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -340,8 +340,10 @@ public class MainActivity extends BaseActivity {
 
     private void loadPhotoFromCamera() {
 
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
 
             Intent takeCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -349,11 +351,9 @@ public class MainActivity extends BaseActivity {
                 mPhotoFile = createImageFile();
             } catch (IOException e) {
                 e.printStackTrace();
-                //TODO: обработать ошибку
             }
 
             if (mPhotoFile != null) {
-                //TODO передать фотографию интенту
                 takeCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mPhotoFile));
                 startActivityForResult(takeCaptureIntent, ConstantManager.REQUEST_CAMERA_PICTURE);
             }

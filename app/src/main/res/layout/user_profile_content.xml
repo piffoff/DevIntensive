@@ -150,7 +150,7 @@
             <ImageView
                 style="@style/MyStyleIconLeft"
                 android:contentDescription="@string/DescriptionPhone"
-                android:src="@drawable/vk_circle"/>
+                android:src="@drawable/ic_vk_circle_24"/>
 
             <LinearLayout style="@style/MyStyleInfoListContent">
 
@@ -171,7 +171,7 @@
                 android:id="@+id/vk_img"
                 style="@style/MyStyleIconRight"
                 android:contentDescription="@string/content_descripshion"
-                android:src="@drawable/eye"/>
+                android:src="@drawable/ic_eye_24"/>
 
         </LinearLayout>
 
@@ -182,7 +182,7 @@
             <ImageView
                 style="@style/MyStyleIconLeft"
                 android:contentDescription="@string/DescriptionPhone"
-                android:src="@drawable/github_circle"/>
+                android:src="@drawable/ic_github_circle_24"/>
 
             <LinearLayout style="@style/MyStyleInfoListContent">
 
@@ -203,7 +203,7 @@
                 android:id="@+id/repository_img"
                 style="@style/MyStyleIconRight"
                 android:contentDescription="@string/content_descripshion"
-                android:src="@drawable/eye"/>
+                android:src="@drawable/ic_eye_24"/>
 
         </LinearLayout>
 
@@ -214,7 +214,7 @@
             <ImageView
                 style="@style/MyStyleIconLeft"
                 android:contentDescription="@string/DescriptionPhone"
-                android:src="@drawable/account"/>
+                android:src="@drawable/ic_account_24"/>
 
             <LinearLayout style="@style/MyStyleInfoListContent">
 
