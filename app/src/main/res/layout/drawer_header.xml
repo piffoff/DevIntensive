@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="172dp"
+    android:paddingLeft="@dimen/size_16"
+    android:paddingRight="@dimen/size_16"
+    android:paddingTop="@dimen/size_24"
+    android:paddingBottom="@dimen/size_8"
+    android:background="@drawable/nav_header_bg">
+
+    <ImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="@dimen/size_60"
+        android:layout_height="@dimen/size_60"
+        android:layout_marginTop="@dimen/size_16"
+        android:src="@drawable/user_photo"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_56"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical">
+        <TextView
+            style="@style/MyMenuHeadText"
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Usupov Sergey"
+            />
+        <TextView
+            style="@style/MyMenuHeadText"
+            android:id="@+id/user_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MyMail@gmail.com"/>
+    </LinearLayout>
+</RelativeLayout>

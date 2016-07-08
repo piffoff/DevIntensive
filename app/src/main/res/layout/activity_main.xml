@@ -1,236 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
+
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/navigation_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context=".ui.activities.MainActivity">
 
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/info_element_height"
-            android:background="@color/color_grey"
-            android:baselineAligned="false"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+                app:contentScrim="@color/color_primary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <TextView
-                    style="@style/MyStileHeadNumberStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/info_rating" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/pic_size">
 
-                <TextView
-                    style="@style/MyStileHeadTextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/info_rating_text" />
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/user_photo_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/pic_size"
+                        android:fitsSystemWindows="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/user_photo"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+                    <include layout="@layout/user_photo"/>
 
-                <TextView
-                    style="@style/MyStileHeadNumberStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/info_code_amount" />
+                </FrameLayout>
 
-                <TextView
-                    style="@style/MyStileHeadTextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/info_code_amount_text" />
-            </LinearLayout>
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:theme="@style/AppTheme.PopupOverlay"
+                    android:titleTextColor="@color/color_white"
+                    app:layout_collapseMode="pin"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+            </android.support.design.widget.CollapsingToolbarLayout>
 
-                <TextView
-                    style="@style/MyStileHeadNumberStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/info_projects_amount" />
+        </android.support.design.widget.AppBarLayout>
 
-                <TextView
-                    style="@style/MyStileHeadTextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/info_projects_amount_text" />
-            </LinearLayout>
+        <include layout="@layout/user_profile_content"/>
 
-        </LinearLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/fab_right_space"
+            android:src="@drawable/ic_create_black_24dp"
+            app:layout_anchor="@id/appbar_layout"
+            app:layout_anchorGravity="bottom|right"/>
 
-        <LinearLayout style="@style/MyStyleInfoList">
+    </android.support.design.widget.CoordinatorLayout>
 
-            <ImageView
-                style="@style/MyStyleIconLeft"
-                android:contentDescription="@string/DescriptionPhone"
-                android:src="@drawable/ic_call_black_24dp" />
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/drawer_menu">
 
-            <LinearLayout style="@style/MyStyleInfoListContent">
+    </android.support.design.widget.NavigationView>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        style="@style/MyStyleInfoListEditText"
-                        android:hint="@string/mobile_phone"
-                        android:inputType="phone"
-                        android:text="@string/my_phone" />
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
-
-            <ImageView
-                style="@style/MyStyleIconRight"
-                android:contentDescription="@string/content_descripshion"
-                android:src="@drawable/ic_phone_in_talk_black_24dp" />
-
-        </LinearLayout>
-
-        <View style="@style/MyStyleLineStyle"></View>
-
-        <LinearLayout style="@style/MyStyleInfoList">
-
-            <ImageView
-                style="@style/MyStyleIconLeft"
-                android:contentDescription="@string/DescriptionPhone"
-                android:src="@drawable/ic_email_black_24dp" />
-
-            <LinearLayout style="@style/MyStyleInfoListContent">
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        style="@style/MyStyleInfoListEditText"
-                        android:hint="@string/email_hint"
-                        android:inputType="text"
-                        android:text="@string/mail_text" />
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
-
-            <ImageView
-                style="@style/MyStyleIconRight"
-                android:contentDescription="@string/content_descripshion"
-                android:src="@drawable/ic_send_black_24dp" />
-
-        </LinearLayout>
-
-        <View style="@style/MyStyleLineStyle"></View>
-
-        <LinearLayout style="@style/MyStyleInfoList">
-
-            <ImageView
-                style="@style/MyStyleIconLeft"
-                android:contentDescription="@string/DescriptionPhone"
-                android:src="@drawable/vk_circle" />
-
-            <LinearLayout style="@style/MyStyleInfoListContent">
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        style="@style/MyStyleInfoListEditText"
-                        android:hint="@string/vk_hint"
-                        android:inputType="phone"
-                        android:text="@string/vk_text" />
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
-
-            <ImageView
-                style="@style/MyStyleIconRight"
-                android:contentDescription="@string/content_descripshion"
-                android:src="@drawable/eye" />
-
-        </LinearLayout>
-
-        <View style="@style/MyStyleLineStyle"></View>
-
-        <LinearLayout style="@style/MyStyleInfoList">
-
-            <ImageView
-                style="@style/MyStyleIconLeft"
-                android:contentDescription="@string/DescriptionPhone"
-                android:src="@drawable/github_circle" />
-
-            <LinearLayout style="@style/MyStyleInfoListContent">
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        style="@style/MyStyleInfoListEditText"
-                        android:hint="@string/repository_hint"
-                        android:inputType="text"
-                        android:text="@string/repository_text" />
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
-
-            <ImageView
-                style="@style/MyStyleIconRight"
-                android:contentDescription="@string/content_descripshion"
-                android:src="@drawable/eye" />
-
-        </LinearLayout>
-
-        <View style="@style/MyStyleLineStyle"></View>
-
-        <LinearLayout style="@style/MyStyleInfoList">
-
-            <ImageView
-                style="@style/MyStyleIconLeft"
-                android:contentDescription="@string/DescriptionPhone"
-                android:src="@drawable/account" />
-
-            <LinearLayout style="@style/MyStyleInfoListContent">
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        style="@style/MyStyleInfoListEditText"
-                        android:hint="@string/about_myself"
-                        android:inputType="phone"
-                        android:text="@string/about_myself_text" />
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
-
-            <ImageView
-                style="@style/MyStyleIconRight"
-                android:contentDescription="@string/content_descripshion"/>
-
-        </LinearLayout>
-
-        <View style="@style/MyStyleLineStyle"></View>
-
-    </LinearLayout>
-
-</android.support.v4.widget.NestedScrollView>
+</android.support.v4.widget.DrawerLayout>
