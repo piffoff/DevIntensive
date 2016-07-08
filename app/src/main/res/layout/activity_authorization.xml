@@ -11,10 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/login_bg"
-        />
+        android:src="@drawable/login_bg"/>
 
-    <!-- Authorization Box -->
     <LinearLayout
         android:id="@+id/authorization_box"
         android:layout_width="match_parent"
@@ -25,7 +23,6 @@
         android:background="@color/color_white"
         android:orientation="vertical">
 
-        <!-- ENTER -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,14 +45,9 @@
 
         </LinearLayout>
 
-        <!-- Login -->
         <LinearLayout
-            style="@style/authorization_LL_infoBox"
+            style="@style/authorization_infoBox"
             android:layout_marginBottom="@dimen/size_8">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/auth_login_editText"
                     style="@style/authorization_editText"
@@ -63,13 +55,10 @@
                     android:inputType="textEmailAddress"
                     android:text="@string/mail_text"
                     android:textSize="@dimen/textSize_12"/>
-            </android.support.design.widget.TextInputLayout>
-
         </LinearLayout>
 
-        <!-- Password -->
         <LinearLayout
-            style="@style/authorization_LL_infoBox">
+            style="@style/authorization_infoBox">
                 <EditText
                     android:id="@+id/password_editText"
                     style="@style/authorization_editText"
@@ -77,26 +66,15 @@
                     android:inputType="textPassword"/>
         </LinearLayout>
 
-        <!-- Button ENTER -->
-        <android.support.v7.widget.ButtonBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/size_8"
-            android:layout_marginLeft="@dimen/size_24"
-            android:layout_marginRight="@dimen/size_24"
-            android:layout_marginTop="@dimen/size_24"
-            android:gravity="center">
-
             <Button
                 android:id="@+id/auth_enter_button"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/size_36"
                 android:text="@string/header_authorization_enter"
-                android:textColor="@color/color_black"/>
+                android:textColor="@color/color_black"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/color_accent"/>
 
-        </android.support.v7.widget.ButtonBarLayout>
-
-        <!-- Forgotten password -->
         <TextView
             android:id="@+id/forgot_pass_button"
             android:layout_width="match_parent"
@@ -108,7 +86,6 @@
             android:gravity="center"
             android:text="@string/hint.authorization_forgotten_password"
             android:textColor="@color/color_black"/>
-
     </LinearLayout>
 
 </FrameLayout>

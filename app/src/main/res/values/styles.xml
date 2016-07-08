@@ -84,9 +84,7 @@
     
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark"></style>
 
-    <!-- Authorization screen -->
-
-    <style name="authorization_LL_infoBox">
+    <style name="authorization_infoBox">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/size_48</item>
         <item name="android:gravity">bottom</item>
