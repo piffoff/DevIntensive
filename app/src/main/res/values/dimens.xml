@@ -5,6 +5,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!--All sizes-->
+    <dimen name="size_4">4dp</dimen>
     <dimen name="size_8">8dp</dimen>
     <dimen name="size_12">12dp</dimen>
     <dimen name="size_16">16dp</dimen>
@@ -26,5 +27,18 @@
     <dimen name="info_list_element_height">72dp</dimen>
     <dimen name="zero">0dp</dimen>
     <dimen name="line_size">2dp</dimen>
+    <dimen name="pic_size">256dp</dimen>
+
+    <dimen name="fab_right_space">16dp</dimen>
+
+    <dimen name="line_size_1">1dp</dimen>
+    <dimen name="profileImage_size_256">256dp</dimen>
+
+    <dimen name="toolbar_top_offset">0dp</dimen>
+    <dimen name="placeholder_photo_size_90">90dp</dimen>
+    <dimen name="authScreen_authBox_sideOffset">72dp</dimen>
+
+    <dimen name="textSize_12">12sp</dimen>
+    <dimen name="textSize_20">20sp</dimen>
 
 </resources>

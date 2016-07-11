@@ -14,10 +14,20 @@
     <string name="content_descripshion">content_descripshion</string>
     <string name="mail_text">MyMail@mail.ru</string>
     <string name="vk_hint">VK</string>
-    <string name="vk_text">http://vk/piffoff</string>
+    <string name="vk_text">vk.com/piffoff</string>
     <string name="repository_hint">GitHub</string>
-    <string name="repository_text">http://github/piffoff</string>
+    <string name="repository_text">github.com/piffoff</string>
     <string name="about_myself">About myself</string>
     <string name="about_myself_text">Hello! My name is Sergey!</string>
+    <string name="action_settings">Настройки</string>
+    <string name="change_user_photo">Изменить фотографию профиля</string>
+    <string name="user_profile_dialog_title">Выбрать фото</string>
+    <string name="user_profile_choose_massage">Выбрать фото</string>
+    <string name="dialog_load_from_gallery">Загрузить из галереи</string>
+    <string name="dialog_make_photo">Сделать фото</string>
+    <string name="dialog_cancel">Отмена</string>
+    <string name="header_authorization_enter">Enter</string>
+    <string name="hint.authorization_forgotten_password">Forgot password?</string>
+    <string name="hint_authorization_password">Password</string>
 
 </resources>
